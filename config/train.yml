@@ -1,0 +1,69 @@
+
+data:
+  train_list: /content/drive/MyDrive/voxceleb_subset/train_list.txt
+  test_list: /content/drive/MyDrive/voxceleb_subset/test_list.txt
+  id_list: /content/drive/MyDrive/voxceleb_subset/id_list.txt
+  input_length: 240000
+  sample_rate: 16000
+  input_length: 240000
+  sample_rate: 16000
+
+model:
+  encoder_type: conformer
+  hidden_size: 128
+  num_layers: 4
+  attention_heads: 4
+  ffn_hidden_size: 512
+  pooling: temporal_gate
+  multi_head_pooling: true
+  use_pretrained: false
+  mel_filter_size: 80
+  max_length: 2048
+  intermediate_size: 256
+  dropout_probability: 0.1
+  num_attention_heads: 4
+  pooling_type: 'temporal_gate'
+  pooling_hidden_size: 256
+  embedding_size: 256
+  factor_size: 256         
+  with_aam_softmax: false
+  num_speakers: 100
+  learning_rate: 1e-4
+  weight_decay: 0.01
+  pooling_num_heads: 4
+  filter_size: 512  
+  
+
+
+classifier:
+  type: aam_softmax
+  margin: 0.2
+  scale: 30
+
+training:
+  epochs: 1
+  batch_size: 16
+  learning_rate: 1e-4
+  weight_decay: 0.01
+  warmup_steps: 1000
+  optimizer: adamw
+  scheduler: linear_warmup_cosine_decay
+  save_path: checkpoints/
+  log_interval: 10
+  eval_interval: 1
+  seed: 42
+  amp: true
+
+logging:
+  use_tensorboard: false
+  log_dir: logs/
+
+preprocessing:
+  fixed_time: 10
+  sampling_rate: 16000
+  n_fft: 512
+  win_length: 400
+  hop_length: 160
+  mel_filter_size: 80
+  win_time: 0.025
+  stride_time: 0.01
