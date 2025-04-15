@@ -107,6 +107,15 @@ def main(config_path):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
+    loss_log_path = os.path.join(cfg["training"]["save_path"], "loss_log.txt")
+    acc_log_path = os.path.join(cfg["training"]["save_path"], "acc_log.txt")
+
+    # ✅ Clear existing logs (optional)
+    with open(loss_log_path, "w") as f:
+        f.write("")
+    with open(acc_log_path, "w") as f:
+        f.write("")
+
     # # Wrap sub-configs only once if needed
     # if isinstance(cfg["model"], dict):
     #     cfg["model"] = SimpleNamespace(**cfg["model"])
@@ -162,10 +171,14 @@ def main(config_path):
 
         avg_loss = running_loss / len(train_loader)
         print(f"Epoch {epoch+1} - Training Loss: {avg_loss:.4f}")
+        with open(loss_log_path, "a") as f:
+            f.write(f"{avg_loss:.4f}\n")
 
         if (epoch + 1) % cfg["training"]["eval_interval"] == 0:
             acc = evaluate(model, test_loader, device)
             print(f"Validation Accuracy: {acc:.4f}")
+            with open(acc_log_path, "a") as f:
+                f.write(f"{acc:.4f}\n")
             if acc > best_acc:
                 best_acc = acc
                 torch.save(model.state_dict(), os.path.join(cfg["training"]["save_path"], "best_model.pth"))
