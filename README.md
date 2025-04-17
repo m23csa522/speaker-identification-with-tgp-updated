@@ -32,7 +32,7 @@ This repository implements a Conformer-based speaker identification model, enhan
 
 ## Reference Paper
 An Effective Transformer-based Contextual Model and Temporal Gate Pooling for Speaker Identification
-[Link Text]https://arxiv.org/abs/2308.11241
+[Link Text](https://arxiv.org/abs/2308.11241)
 
 ---
 
