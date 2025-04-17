@@ -30,6 +30,10 @@
 
 This repository implements a Conformer-based speaker identification model, enhanced with **Temporal Gate Pooling (TGP)**. It supports multiple pooling strategies and is trained on a subset of the VoxCeleb dataset.
 
+## Reference Paper
+An Effective Transformer-based Contextual Model and Temporal Gate Pooling for Speaker Identification
+[Link Text]https://arxiv.org/abs/2308.11241
+
 ---
 
 ## 📌 Features
@@ -82,7 +86,6 @@ pip install -r requirements.txt
 ├── pre_processing/              # Mel-spectrogram + padding logic
 ├── utils/                       # Dataset & samplers
 ├── checkpoints/                 # Saved models
-└── logs/                        # Training/evaluation logs
 ```
 
 ---
